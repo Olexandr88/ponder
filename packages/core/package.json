@@ -1,6 +1,6 @@
 {
   "name": "ponder",
-  "version": "0.15.17",
+  "version": "0.16.2",
   "description": "An open-source framework for crypto application backends",
   "license": "MIT",
   "type": "module",
@@ -37,6 +37,7 @@
   "scripts": {
     "build": "tsx build.ts",
     "test": "vitest",
+    "test:bun": "bun test",
     "test:typecheck": "vitest --typecheck.only",
     "typecheck": "tsc --noEmit"
   },

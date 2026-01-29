@@ -1,11 +1,13 @@
 import { createBuild } from "@/build/index.js";
 import {
+  PONDER_META_TABLE_NAME,
   type PonderApp0,
   type PonderApp1,
   type PonderApp2,
   type PonderApp3,
   type PonderApp4,
   type PonderApp5,
+  type PonderApp6,
   VIEWS,
   createDatabase,
   getPonderMetaTable,
@@ -107,26 +109,24 @@ export async function list({ cliOptions }: { cliOptions: CliOptions }) {
     db
       .select({ schema: TABLES.table_schema })
       .from(TABLES)
-      .where(eq(TABLES.table_name, "_ponder_meta")),
+      .where(eq(TABLES.table_name, PONDER_META_TABLE_NAME)),
   );
 
   const ponderViewSchemas = await database.adminQB.wrap((db) =>
     db
       .select({ schema: VIEWS.table_schema })
       .from(VIEWS)
-      .where(eq(VIEWS.table_name, "_ponder_meta")),
+      .where(eq(VIEWS.table_name, PONDER_META_TABLE_NAME)),
   );
 
   const queries = ponderSchemas.map((row) =>
-    database.adminQB.wrap((db) =>
-      db
-        .select({
-          value: getPonderMetaTable(row.schema).value,
-          schema: sql<string>`${row.schema}`.as("schema"),
-        })
-        .from(getPonderMetaTable(row.schema))
-        .where(eq(getPonderMetaTable(row.schema).key, "app")),
-    ),
+    database.adminQB.raw
+      .select({
+        value: getPonderMetaTable(row.schema).value,
+        schema: sql<string>`${row.schema}`.as("schema"),
+      })
+      .from(getPonderMetaTable(row.schema))
+      .where(eq(getPonderMetaTable(row.schema).key, "app")),
   );
 
   if (queries.length === 0) {
@@ -144,15 +144,16 @@ export async function list({ cliOptions }: { cliOptions: CliOptions }) {
       | PonderApp2
       | PonderApp3
       | PonderApp4
-      | PonderApp5;
+      | PonderApp5
+      | PonderApp6;
     schema: string;
   }[];
 
   if (queries.length === 1) {
-    result = await queries[0]!;
+    result = await database.adminQB.wrap(() => queries[0]!);
   } else {
     // @ts-ignore
-    result = await unionAll(...queries);
+    result = await database.adminQB.wrap(() => unionAll(...queries));
   }
 
   const columns = [
@@ -168,7 +169,7 @@ export async function list({ cliOptions }: { cliOptions: CliOptions }) {
     (
       row,
     ): row is {
-      value: PonderApp2 | PonderApp3 | PonderApp4 | PonderApp5;
+      value: PonderApp2 | PonderApp3 | PonderApp4 | PonderApp5 | PonderApp6;
       schema: string;
     } => "is_dev" in row.value && row.value.is_dev === 0,
   );

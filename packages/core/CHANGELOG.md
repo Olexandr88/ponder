@@ -1,5 +1,40 @@
 # ponder
 
+## 0.16.2
+
+### Patch Changes
+
+- [#2255](https://github.com/ponder-sh/ponder/pull/2255) [`dbd82e3`](https://github.com/ponder-sh/ponder/commit/dbd82e38f0c88ed48a84d802b788d5186e3e3008) Thanks [@kyscott18](https://github.com/kyscott18)! - Improved handling of large `eth_getLogs` responses. Fixed "Maximum call stack size exceeded".
+
+## 0.16.1
+
+### Patch Changes
+
+- [#2248](https://github.com/ponder-sh/ponder/pull/2248) [`ff29984`](https://github.com/ponder-sh/ponder/commit/ff2998452aead6f0accc039aae9aa24903935064) Thanks [@kyscott18](https://github.com/kyscott18)! - Fixed GraphQL filtering for `int8()` and `numeric()` column types. Previously these column types were using string filter conditions (contains, starts_with, ends_with), now they use numeric filter conditions (gt, gte, lt, lte).
+
+## 0.16.0
+
+### Minor Changes
+
+- [#2229](https://github.com/ponder-sh/ponder/pull/2229) [`a021354`](https://github.com/ponder-sh/ponder/commit/a0213549e279580ab48877b25a1a8a046ff3afe8) Thanks [@kyscott18](https://github.com/kyscott18)! - Released `0.16`. Visit the [migration guide](https://ponder.sh/docs/migration-guide#016) for details.
+
+### Patch Changes
+
+- [#2229](https://github.com/ponder-sh/ponder/pull/2229) [`a021354`](https://github.com/ponder-sh/ponder/commit/a0213549e279580ab48877b25a1a8a046ff3afe8) Thanks [@kyscott18](https://github.com/kyscott18)! - Updated internal database object names. Fixed `error: channel name too long`.
+
+- [#2229](https://github.com/ponder-sh/ponder/pull/2229) [`a021354`](https://github.com/ponder-sh/ponder/commit/a0213549e279580ab48877b25a1a8a046ff3afe8) Thanks [@kyscott18](https://github.com/kyscott18)! - Improved backfill indexing performance.
+
+- [#2229](https://github.com/ponder-sh/ponder/pull/2229) [`a021354`](https://github.com/ponder-sh/ponder/commit/a0213549e279580ab48877b25a1a8a046ff3afe8) Thanks [@kyscott18](https://github.com/kyscott18)! - Exposed full node-postgres poolConfig in `ponder.config.ts`.
+
+## 0.15.18
+
+### Patch Changes
+
+- [#2241](https://github.com/ponder-sh/ponder/pull/2241) [`d3839fb`](https://github.com/ponder-sh/ponder/commit/d3839fbeb2270bc27de864055e6026e9fc581e63) Thanks [@kyscott18](https://github.com/kyscott18)! - Fixed a bug with `ponder db list` that caused `TypeError: leftSelect.getSelectedFields is not a function`.
+
+- Updated dependencies [[`9c36e5e`](https://github.com/ponder-sh/ponder/commit/9c36e5ef3c39f9d8ec2debf10fa2a04aacc7841f)]:
+  - @ponder/utils@0.2.17
+
 ## 0.15.17
 
 ### Patch Changes
