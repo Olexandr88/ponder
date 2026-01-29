@@ -14,8 +14,7 @@ import {
 import { EVENT_TYPES, encodeCheckpoint } from "@/utils/checkpoint.js";
 import { count, relations } from "drizzle-orm";
 import { type GraphQLType, execute, parse } from "graphql";
-import { toBytes } from "viem";
-import { zeroAddress } from "viem";
+import { toBytes, zeroAddress } from "viem";
 import { beforeEach, expect, test, vi } from "vitest";
 import { buildDataLoaderCache, buildGraphQLSchema } from "./index.js";
 
